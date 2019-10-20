@@ -8,11 +8,25 @@ VIDEO_SUFFIXES = [".mkv", ".mp4", ".avi"]
 SUBTITLE_SUFFIXES = [".ass", ".ssa", ".srt"]
 
 
-def main(filenames: List[str], dryrun: bool = True):
+def preprocess_paths(paths: List[str]) -> List[Path]:
+    pwd = Path(".")
+    rv = []
+    for path in paths:
+        if "*" in path:
+            rv += list(pwd.glob(path))
+        else:
+            path = Path(path)
+            if path.is_dir():
+                rv += list(path.iterdir())
+            else:
+                rv.append(path)
+    return rv
+
+
+def main(files: List[Path], dryrun: bool = True):
     videos: List[Path] = []
     subtitles: List[Path] = []
-    for filename in filenames:
-        file = Path(filename)
+    for file in files:
         suffix = file.suffix.lower()
         if suffix in VIDEO_SUFFIXES:
             videos.append(file)
@@ -45,7 +59,7 @@ def cli():
     parser.set_defaults(feature=True)
 
     args = parser.parse_args()
-    main(args.files, args.dryrun)
+    main(preprocess_paths(args.files), args.dryrun)
 
 
 if __name__ == "__main__":
