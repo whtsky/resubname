@@ -23,17 +23,28 @@ def preprocess_paths(paths: List[str]) -> List[Path]:
     return rv
 
 
-def main(files: List[Path], dryrun: bool = True):
+def should_exclude(file: Path, exclude_keywords: List[str]):
+    name = file.name.lower()
+    for keyword in exclude_keywords:
+        if keyword in name:
+            return True
+    return False
+
+
+def main(files: List[Path], exclude_keywords: List[str], dryrun: bool = True):
+    exclude_keywords = [s.lower() for s in exclude_keywords]
     videos: List[Path] = []
     subtitles: List[Path] = []
     for file in files:
+        if should_exclude(file, exclude_keywords):
+            continue
         suffix = file.suffix.lower()
         if suffix in VIDEO_SUFFIXES:
             videos.append(file)
         elif suffix in SUBTITLE_SUFFIXES:
             subtitles.append(file)
         else:
-            raise Exception(f"Unknown suffix: {suffix} ( {filename} )")
+            print(f"Unknown suffix: {suffix} ( {file.name} ), ignore")
     if len(videos) != len(subtitles):
         raise Exception("len(videos) != len(subtitles)")
     videos.sort()
@@ -46,20 +57,30 @@ def main(files: List[Path], dryrun: bool = True):
                 subtitle.rename(new_filename)
 
 
-def cli():
+def cli(args=None):
     import argparse
 
     parser = argparse.ArgumentParser(
         description="Rename subtitles based on video file names"
     )
+
+    parser.add_argument("--dryrun", action="store_true", help="Don't rename files")
+    parser.add_argument(
+        "-e",
+        "--exclude",
+        type=str,
+        action="append",
+        default=[],
+        help="exclude files contain certain keywords",
+    )
+
     parser.add_argument(
         "files", type=str, nargs=argparse.ONE_OR_MORE, help="video & subtitle files"
     )
-    parser.add_argument("--dryrun", action="store_true", help="Don't rename files")
-    parser.set_defaults(feature=True)
 
-    args = parser.parse_args()
-    main(preprocess_paths(args.files), args.dryrun)
+    args = parser.parse_args(args)
+
+    main(preprocess_paths(args.files), args.exclude, args.dryrun)
 
 
 if __name__ == "__main__":

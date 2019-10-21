@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "resubname"
+version = "0.1.0"
+description = "Rename subtitle filenames to match videos."
+authors = ["Wu Haotian <whtsky@gmail.com>"]
+license = "BSD-3-Clause"
+readme = "README.md"
+repository = "https://github.com/whtsky/resubname"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+black = "^19.3b0"
+pytest = "^5.2.1"
+pytest-cov = "^2.8.1"
+snapshottest = "^0.5.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+resubname = "resubname:cli"
