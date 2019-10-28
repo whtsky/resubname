@@ -1,19 +1,35 @@
 on: push
 name: Main workflow
 jobs:
-  pytest:
+  black:
+    name: black
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: [ '3.6', '3.7', '3.8' ]
-    name: Python ${{ matrix.python }}
+    container: python:3.8
+
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python }}
-          architecture: x64
-      - uses: dschep/install-poetry-action@v1.2
+      - name: Check Python version
+        run: |
+          python -V
+      - run: pip install poetry
+      - run: poetry install
+      - run: poetry run black --check .
+  pytest:
+    name: Test on ${{ matrix.container }}
+    runs-on: ubuntu-latest
+    container: ${{ matrix.container }}
+    strategy:
+      matrix:
+        container:
+          - python:3.8
+          - python:3.7
+          - python:3.6
+    steps:
+      - uses: actions/checkout@master
+      - name: Check Python version
+        run: |
+          python -V
+      - run: pip install poetry
       - run: poetry install
       - run: poetry run pytest --cov=resubname --cov-report xml --cov-report term-missing
       - uses: codecov/codecov-action@v1.0.2
