@@ -50,3 +50,14 @@ And you can exclude certain files:
 ```
 resubname -h
 ```
+
+## Changelog
+
+### v0.2.0
+
+- Show videos and subtitiles file list when their number dismatch.
+- Stop complain about "Unknown suffix" for folders. Will just ignore them.
+
+### v0.1.0
+
+- Initial Release
