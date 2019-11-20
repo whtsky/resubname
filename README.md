@@ -53,6 +53,10 @@ resubname -h
 
 ## Changelog
 
+### v0.3.0
+
+- Display videos & subtitles number when their number dismatch.
+
 ### v0.2.0
 
 - Show videos and subtitiles file list when their number dismatch.

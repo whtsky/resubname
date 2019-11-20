@@ -45,17 +45,17 @@ def main(files: List[Path], exclude_keywords: List[str], dryrun: bool = True):
             videos.append(file)
         elif suffix in SUBTITLE_SUFFIXES:
             subtitles.append(file)
-        else:
-            print(f"Unknown suffix: {suffix} ( {file.name} ), ignore")
+    videos.sort()
+    subtitles.sort()
     if len(videos) != len(subtitles):
         raise Exception(
-            "Videos and subtitles number dismatch.\n\nVideos:\n{videos}\n\nSubtitles:\n{subtitles}".format(
+            "Videos({video_len}) and subtitles({subtitle_len}) number dismatch.\n\nVideos:\n{videos}\n\nSubtitles:\n{subtitles}".format(
+                video_len=len(videos),
+                subtitle_len=len(subtitles),
                 videos="\n".join([f"\t{f.name}" for f in videos]),
                 subtitles="\n".join([f"\t{f.name}" for f in subtitles]),
             )
         )
-    videos.sort()
-    subtitles.sort()
     for index, subtitle in enumerate(subtitles):
         new_filename = subtitle.with_name(videos[index].stem + subtitle.suffix)
         if str(subtitle) != str(new_filename):
