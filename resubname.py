@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 
 import sys
-from typing import List
 from pathlib import Path
+from typing import List
+
+import pkg_resources
+
+try:
+    __version__ = pkg_resources.get_distribution("resubname").version
+except pkg_resources.DistributionNotFound:
+    __version__ = "dev"
 
 VIDEO_SUFFIXES = [
     ".webm",
@@ -112,6 +119,13 @@ def cli(args=None):
 
     parser = argparse.ArgumentParser(
         description="Rename subtitles based on video file names"
+    )
+
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s {version}".format(version=__version__),
     )
 
     parser.add_argument("--dryrun", action="store_true", help="Don't rename files")
