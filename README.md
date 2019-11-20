@@ -56,6 +56,7 @@ resubname -h
 ### v0.3.0
 
 - Display videos & subtitles number when their number dismatch.
+- Add support for more video formats.
 
 ### v0.2.0
 
