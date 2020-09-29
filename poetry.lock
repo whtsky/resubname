@@ -225,21 +225,21 @@ version = "1.15.0"
 
 [[package]]
 category = "dev"
-description = "Snapshot Testing utils for Python"
+description = "Snapshot testing for pytest, unittest, Django, and Nose"
 name = "snapshottest"
 optional = false
 python-versions = "*"
-version = "0.5.1"
+version = "0.6.0"
 
 [package.dependencies]
-fastdiff = ">=0.1.4"
+fastdiff = ">=0.1.4,<1"
 six = ">=1.10.0"
 termcolor = "*"
 
 [package.extras]
 nose = ["nose"]
 pytest = ["pytest"]
-test = ["six", "pytest (>=3.1.0)", "pytest-cov", "nose", "django (>=1.10.6)"]
+test = ["six", "pytest (>=4.6)", "pytest-cov", "nose", "django (>=1.10.6)"]
 
 [[package]]
 category = "dev"
@@ -296,7 +296,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "fae100bd29650ab5037a0ab7ba9b1963000bf86f535bf685e9b6bba7940b55bd"
+content-hash = "c46b4c81fc6d8b2b69205ed15bc6641026e16ade554fb3b730e558dee422f0fb"
 lock-version = "1.0"
 python-versions = "^3.6"
 
@@ -428,7 +428,8 @@ six = [
     {file = "six-1.15.0.tar.gz", hash = "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"},
 ]
 snapshottest = [
-    {file = "snapshottest-0.5.1.tar.gz", hash = "sha256:2cc7157e77674ea8ebeb2351466ff50cd4b5ad8e213adc06df9c16a75ab5bafc"},
+    {file = "snapshottest-0.6.0-py2.py3-none-any.whl", hash = "sha256:9b177cffe0870c589df8ddbee0a770149c5474b251955bdbde58b7f32a4ec429"},
+    {file = "snapshottest-0.6.0.tar.gz", hash = "sha256:bbcaf81d92d8e330042e5c928e13d9f035e99e91b314fe55fda949c2f17b653c"},
 ]
 termcolor = [
     {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
