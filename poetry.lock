@@ -314,8 +314,8 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=4.6)", "pytest-black (
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.6"
-content-hash = "028794d1d61a022a4b9594e9a2c696e42c411f0d00a13478a36494f0dde61c73"
+python-versions = "^3.6.15"
+content-hash = "6495d26595fd6e37e3a83fe46320498e78a60bdccc342a3009aadc6d1e88d3e0"
 
 [metadata.files]
 appdirs = [
