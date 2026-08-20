@@ -6,19 +6,20 @@ authors = ["Wu Haotian <whtsky@gmail.com>"]
 license = "BSD-3-Clause"
 readme = "README.md"
 repository = "https://github.com/whtsky/resubname"
+requires-poetry = ">=2.1,<3.0"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "^19.3b0"
 pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
 snapshottest = "^0.6.0"
 
 [build-system]
-requires = ["poetry>=1.8.5"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=2.1.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 resubname = "resubname:cli"

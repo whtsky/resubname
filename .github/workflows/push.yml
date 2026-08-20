@@ -7,11 +7,11 @@ jobs:
     container: python:3.8
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v5
       - name: Check Python version
         run: |
           python -V
-      - run: pip install poetry
+      - run: pip install "poetry>=2.1,<2.2"
       - run: poetry install
       - run: poetry run black --check .
   pytest:
@@ -21,15 +21,19 @@ jobs:
     strategy:
       matrix:
         container:
+          - python:3.14
+          - python:3.13
+          - python:3.12
+          - python:3.11
+          - python:3.10
+          - python:3.9
           - python:3.8
-          - python:3.7
-          - python:3.6
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v5
       - name: Check Python version
         run: |
           python -V
-      - run: pip install poetry
+      - run: pip install "poetry>=2.1,<2.2"
       - run: poetry install
       - run: poetry run pytest --cov=resubname --cov-report xml --cov-report term-missing
       - uses: codecov/codecov-action@v6.0.2

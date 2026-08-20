@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import sys
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import List
 
-import pkg_resources
-
 try:
-    __version__ = pkg_resources.get_distribution("resubname").version
-except pkg_resources.DistributionNotFound:
+    __version__ = version("resubname")
+except PackageNotFoundError:
     __version__ = "dev"
 
 VIDEO_SUFFIXES = [
