@@ -17,7 +17,7 @@ pytest-cov = "^3.0.0"
 snapshottest = "^0.6.0"
 
 [build-system]
-requires = ["poetry>=1.8.5"]
+requires = ["poetry>=2.4.1"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
