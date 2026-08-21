@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
-import sys
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
-from typing import List
 
 try:
     __version__ = version("resubname")
@@ -55,7 +53,7 @@ VIDEO_SUFFIXES = [
 SUBTITLE_SUFFIXES = [".ass", ".ssa", ".srt"]
 
 
-def preprocess_paths(paths: List[str]) -> List[Path]:
+def preprocess_paths(paths: list[str]) -> list[Path]:
     pwd = Path(".")
     rv = []
     for path in paths:
@@ -70,7 +68,7 @@ def preprocess_paths(paths: List[str]) -> List[Path]:
     return rv
 
 
-def should_exclude(file: Path, exclude_keywords: List[str]):
+def should_exclude(file: Path, exclude_keywords: list[str]):
     name = file.name.lower()
     for keyword in exclude_keywords:
         if keyword in name:
@@ -78,10 +76,10 @@ def should_exclude(file: Path, exclude_keywords: List[str]):
     return False
 
 
-def main(files: List[Path], exclude_keywords: List[str], dryrun: bool = True):
+def main(files: list[Path], exclude_keywords: list[str], dryrun: bool = True):
     exclude_keywords = [s.lower() for s in exclude_keywords]
-    videos: List[Path] = []
-    subtitles: List[Path] = []
+    videos: list[Path] = []
+    subtitles: list[Path] = []
     for file in files:
         if should_exclude(file, exclude_keywords):
             continue
@@ -95,7 +93,7 @@ def main(files: List[Path], exclude_keywords: List[str], dryrun: bool = True):
     videos.sort()
     subtitles.sort()
     if len(videos) != len(subtitles):
-        raise Exception(
+        raise ValueError(
             "Videos({video_len}) and subtitles({subtitle_len}) number dismatch.\n\nVideos:\n{videos}\n\nSubtitles:\n{subtitles}".format(
                 video_len=len(videos),
                 subtitle_len=len(subtitles),
@@ -106,11 +104,11 @@ def main(files: List[Path], exclude_keywords: List[str], dryrun: bool = True):
     for index, subtitle in enumerate(subtitles):
         new_filename = subtitle.with_name(videos[index].stem + subtitle.suffix)
         if str(subtitle) != str(new_filename):
-            print(f"{str(subtitle)} -> {new_filename}")
+            print(f"{subtitle!s} -> {new_filename}")
             if not dryrun:
                 subtitle.rename(new_filename)
         else:
-            print(f"{str(subtitle)} Unchanged.")
+            print(f"{subtitle!s} Unchanged.")
 
 
 def cli(args=None):
@@ -124,7 +122,7 @@ def cli(args=None):
         "-v",
         "--version",
         action="version",
-        version="%(prog)s {version}".format(version=__version__),
+        version=f"%(prog)s {__version__}",
     )
 
     parser.add_argument("--dryrun", action="store_true", help="Don't rename files")

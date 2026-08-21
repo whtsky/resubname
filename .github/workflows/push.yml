@@ -1,8 +1,8 @@
 on: push
 name: Main workflow
 jobs:
-  black:
-    name: black
+  ruff:
+    name: ruff
     runs-on: ubuntu-latest
     container: python:3.14
 
@@ -13,7 +13,8 @@ jobs:
           python -V
       - run: pip install "poetry>=2,<3"
       - run: poetry install
-      - run: poetry run black --check .
+      - run: poetry run ruff check .
+      - run: poetry run ruff format --check .
   pytest:
     name: Test on ${{ matrix.container }}
     runs-on: ubuntu-latest
