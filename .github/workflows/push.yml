@@ -4,14 +4,14 @@ jobs:
   black:
     name: black
     runs-on: ubuntu-latest
-    container: python:3.8
+    container: python:3.14
 
     steps:
       - uses: actions/checkout@v5
       - name: Check Python version
         run: |
           python -V
-      - run: pip install "poetry>=2.1,<2.2"
+      - run: pip install "poetry>=2,<3"
       - run: poetry install
       - run: poetry run black --check .
   pytest:
@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ${{ matrix.container }}
     strategy:
+      fail-fast: false
       matrix:
         container:
           - python:3.14
@@ -27,15 +28,18 @@ jobs:
           - python:3.11
           - python:3.10
           - python:3.9
-          - python:3.8
     steps:
       - uses: actions/checkout@v5
       - name: Check Python version
         run: |
           python -V
-      - run: pip install "poetry>=2.1,<2.2"
-      - run: poetry install
-      - run: poetry run pytest --cov=resubname --cov-report xml --cov-report term-missing
+      - name: Install dependencies
+        run: |
+          pip install "poetry>=2,<3"
+          poetry install
+      - name: Run tests
+        run: |
+          poetry run pytest --cov=resubname --cov-report xml --cov-report term-missing
       - uses: codecov/codecov-action@v6.0.2
         with:
           token: ${{secrets.CODECOV_TOKEN}}
