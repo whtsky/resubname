@@ -14,7 +14,7 @@ python = "^3.9"
 [tool.poetry.group.dev.dependencies]
 black = "^19.3b0"
 pytest = "^6.2.5"
-pytest-cov = "^3.0.0"
+pytest-cov = "^6.3.0"
 snapshottest = "^0.6.0"
 
 [build-system]
