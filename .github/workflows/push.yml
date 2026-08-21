@@ -7,7 +7,7 @@ jobs:
     container: python:3.14
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Check Python version
         run: |
           python -V
@@ -30,7 +30,7 @@ jobs:
           - python:3.10
           - python:3.9
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Check Python version
         run: |
           python -V
