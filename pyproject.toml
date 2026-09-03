@@ -14,7 +14,7 @@ python = "^3.9"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.2"
 pytest-cov = "^7.0.0"
-ruff = "^0.16.4"
+ruff = "^0.16.6"
 
 [build-system]
 requires = ["poetry-core>=2.1.0,<3.0.0"]
