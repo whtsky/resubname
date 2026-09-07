@@ -9,7 +9,7 @@ repository = "https://github.com/whtsky/resubname"
 requires-poetry = ">=2.1,<3.0"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.14.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.2"
