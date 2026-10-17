@@ -4,7 +4,7 @@ jobs:
   ruff:
     name: ruff
     runs-on: ubuntu-latest
-    container: python:3.15@sha256:9b99a39a1659e8a507603edfad004c8e33d1855c70a15f2024861bd98ae19416
+    container: python:3.15@sha256:e748956ccf3f50c9555f236753bbcd5f430d3937e665d3bd6922dd0e6e591a24
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
